@@ -22,11 +22,12 @@ from learn.views import add2
 urlpatterns = [
     #url(r'^$',learn_views.index),
     #url(r'^add/$', learn_views.add),
-    #url(r'^add/(\d+)/(\d+)/$', learn_views.add2, name='add2'),
+    url(r'^add/(\d+)/(\d+)/$', learn_views.add2, name='add2'),
     #url(r'^new_add/(\d+)/(\d+)/$', learn_views.add2, name='add2'),
-    #url(r'^$', learn_views.add3,name='home'),
+    url(r'^$', learn_views.add3,name='home'),
     #url(r'^admin/', admin.site.urls),
     #旧页面跳转
     url(r'^add/(\d+)/(\d+)/$', learn_views.redirect),
     url(r'^new_add/(\d+)/(\d+)/$',learn_views.add2,name='add2'),
+    url(r'^home/$', learn_views.home),
 ]

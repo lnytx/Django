@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//learn/templates/home.html=UTF-8
 encoding//learn/views.py=utf-8
+encoding/<project>=UTF-8
 encoding/learn=UTF-8
 encoding/manage.py=UTF-8
 encoding/mysite=UTF-8

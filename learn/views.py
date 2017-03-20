@@ -5,6 +5,8 @@ from builtins import int, str
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template.context_processors import request
+from idlelib.idle_test.mock_tk import Var
+from idlelib.WindowList import ListedToplevel
 # Create your views here.
 def index(request):
     return HttpResponse(u'第一个项目')
@@ -30,7 +32,25 @@ def home(request):
     string=u"我在学习Django在用它来建网站"
     return render(request, 'home.html', {'string': string})
 
+#在视图中我们传递了一个List到模板 home.html，在模板中这样使用它：
+def for_list(request):
+    list1=['a','b','jack','tom','tiiger']
+    return render(request, 'home.html',{'list':list1})
 
+#显示字典中内容
+def show_dict(request):
+    dictname={'site':u'学习Django','content':u'各个IT技术'}
+    return render(request,'home.html',{'dict':dictname})
+#在模板进行 条件判断和 for 循环的详细操作
+def show_for(request):
+    list2=map(str,range(100))
+    return render(request, 'home.html',{'list2':list2})
 
-
+#使用if
+def show_if(request):
+    var=76
+    return render(request, 'home.html',{'var':var})
+def show_listed(request):
+    listed=[['a','b'],['c','d']]
+    return render(request, 'home.html',{'listed':listed})
     

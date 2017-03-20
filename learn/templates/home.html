@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>欢迎光临计算值</title>
+    <title>home.html</title>
 </head>
 <body>
 <a href="/add/4/5/">计算值 4+5</a>
 <p>在视图中我们传递了一个字符串名称是 string 到模板 home.html，在模板中这样使用它</p>
  {{ string }}
+ 
+ <p>在视图中我们传递了一个List到模板 home.html，在模板中这样使用它：</p>
+ {%for i in list%}
+ {{i}}
+ {%endfor%}
+ 
+ <p>显示字典中内容</p>
+ 站点：{{dict.site}},内容：{{dict.content}}
+ 
+ <p>展示for循环的内容</p>
+ {%for item in list2%}
+{{item}}{%if not forloop.last%},{%endif%}
+ {%endfor%}
+ 
+ <p>使用empty</p>
+ {%for i in list%}
+ <li>{{i}}</li>
+ {%empty%}
+ <li>列表为空</li>
+ {%endfor%}
+ 
+ <p>if学习</p>
+ {%if var >= 90%}成绩优秀
+ {%elif var >= 80%}成绩良好
+ {%elif var >= 70%}你的得分是：{{var}},   成绩一般
+ {%elif var >= 60%}刚好及格
+ {%else%}不及格
+ {%endif%}
+ 
+ {% if num <= 100 and num >= 0 %}num在0-100之间
+ {%else%}num不在0-100之间
+ {%endif%}
+ <p></p>
+ {%if 'jack' in list %}jack在list里面
+ {%else%}jack不在list里面
+ {%endif%}
+ 
+ {%if request.user.is_authenticated%}欢迎用户 {{request.user.username}}
+ {%else%}请重新登录，这里放登录链接
+ {%endif%}
+ <p>show_listed多循环</p>
+ {%for list in listed%}
+ {%for item in list%}
+ {{item}}
+ {%endfor%}
+ {%endfor%}
+ 
+ <p>people_list</p>
+ {%for i in list3%}
+ {{i}}
+ {%if not forloop.last%},{%endif%}
+ {%endfor%} 
 </body>
 </html>

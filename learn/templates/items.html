@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户下载页面条件</title>
+</head>
+<body>
+    <form action="/id/" method="post">
+        <input type="text" name="id"/>
+        <input type="submit" value="提交">
+    </form>
+        {% for line in item_list %}
+    <tr>
+    	<td>{{line.id}}</td>
+        <td>{{line.username}}</td>
+        <td>{{line.password}}</td>
+    </tr>
+    {%endfor%}
+</body>
+</html>

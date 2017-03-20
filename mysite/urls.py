@@ -39,5 +39,7 @@ urlpatterns = [
     url(r'^listed/$', learn_views.show_listed),
     url(r'^people/$', people_views.show_people),
     url(r'^insert/$',people_views.insert),
-    url(r'^list/$',people_views.user_list),
+    url(r'^listuser/$',people_views.user_list),
+    url(r'^id/$', people_views.export, name='export'),
+    url(r'^importmould/$', people_views.xls_mould, name='xls_mould'),
 ]

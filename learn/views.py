@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.template.context_processors import request
 from idlelib.idle_test.mock_tk import Var
 from idlelib.WindowList import ListedToplevel
+
 # Create your views here.
 def index(request):
     return HttpResponse(u'第一个项目')

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>用户下载页面条件</title>
-</head>
+<html>
 <body>
-    <form action="/id/" method="post">
-        <input type="text" name="id"/>
-        <input type="submit" value="提交">
-    </form>
-        {% for line in item_list %}
-    <tr>
-    	<td>{{line.id}}</td>
-        <td>{{line.username}}</td>
-        <td>{{line.password}}</td>
-    </tr>
+<p>请输要查找的id</p>
+<form action="/id/" method="get">
+    id: <input type="text" name="id"> <br>
+    <input type="submit" value="提交">
+</form>
+<form action="/export/" method="get">
+    <input type="submit" value="导出">
+</form>
+  {% for line in item_list %}
+  <table>
+  	<td>{{line.id}}</td>
+    <td>{{line.username}}</td>
+    <td>{{line.password}}</td>
+   </table>
     {%endfor%}
 </body>
 </html>

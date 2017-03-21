@@ -55,3 +55,4 @@ def show_listed(request):
     listed=[['a','b'],['c','d']]
     return render(request, 'home.html',{'listed':listed})
     
+    

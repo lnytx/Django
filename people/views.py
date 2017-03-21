@@ -2,6 +2,7 @@ from _decimal import Context
 from _io import StringIO
 from audioop import reverse
 from sys import modules
+import time
 
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -44,32 +45,23 @@ def user_list(request):
     people_list=User.objects.filter(id=1).exclude(id=3)
     return render(request,'showuser.html',{'people_list':people_list})
 
-#导出数据
-def export(request):
-#     if request=='POST':
-#         if request.POST.has_key("export"):
-        items=request.POST.get("id",None)
-        item_list=User.objects.filter(id=items)
-        return render(request,'items.html',{'list':item_list})
-#         return HttpResponseRedirect(
-#             reverse('down')
-#             )
+
+
+    
 
 
 
-
-        
+#导出xls      
 def xls_mould(request):
     response = HttpResponse(content_type='application/vnd.ms-excel') 
-    response['Content-Disposition'] = 'attachment; filename=DEMO.xls'
+    response['Content-Disposition'] = 'attachment; filename='+time.strftime('%Y%m%d',time.localtime(time.time()))+'.xls'
     wb = xlwt.Workbook(encoding = 'utf-8')
     sheet = wb.add_sheet(u'订单')
     #1st line   
     sheet.write(0,0, 'id')
     sheet.write(0,1, '用户名')
     sheet.write(0,2, '密码')
-    
-    people_list=User.objects.all()
+    people_list=User.objects.filter(id=items)
    
     row = 1
     for users in people_list:
@@ -80,3 +72,26 @@ def xls_mould(request):
     wb.save(response)    
     return response
         
+
+#页面传值，根据值导出数据
+def export(request):
+    return render(request, 'items.html')
+def export_list(request):
+        global items
+        items=request.GET.get("id",'None')
+        if items=='None':
+            item_list=User.objects.all()
+        else:
+            item_list=User.objects.filter(id=items)
+        #return HttpResponse(item_list)
+        return render(request,'items.html',{'item_list':item_list})
+    
+#页面间传值
+def index(request):
+    return render(request,'index.html')
+def add(request):
+    a=request.GET.get('a',None)
+    b=request.GET.get('b',None)
+    a=int(a)
+    b=int(b)
+    return HttpResponse(str(a+b))

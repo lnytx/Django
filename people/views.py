@@ -13,6 +13,8 @@ import xlwt
 
 from people.models import User
 
+from .tools import AddForm
+
 
 # Create your views here.
 def show_people(request):
@@ -73,7 +75,7 @@ def xls_mould(request):
     return response
         
 
-#页面传值，根据值导出数据
+#页面传值，根据值查询并导出数据
 def export(request):
     return render(request, 'items.html')
 def export_list(request):
@@ -95,3 +97,17 @@ def add(request):
     a=int(a)
     b=int(b)
     return HttpResponse(str(a+b))
+
+#使用 Django 的 表单 (forms)传值
+def indexform(request):
+    if request.method=='POST':#当提交表单时
+        form=AddForm(request.POST)# form 包含提交的数据
+        if form.is_valid():
+            #a=int(request.POST.get('a',0))
+            #b=int(request.POST['b'])
+            a=form.cleaned_data['a']
+            b=form.cleaned_data['b']
+            return HttpResponse(str(int(a)+int(b)))
+    else:#如果不是post提交数据，就不传参数创建对象，并将对象返回给前台
+        form=AddForm()
+    return render(request, 'index2.html',{'form':form})

@@ -40,9 +40,12 @@ urlpatterns = [
 #     url(r'^people/$', people_views.show_people),
 #     url(r'^insert/$',people_views.insert),
 #     url(r'^listuser/$',people_views.user_list),
+    #url(r'^index/$',people_views.index,name='home'),
+    #url(r'^add/$',people_views.add,name='add'),
+#按条件导出xls
     url(r'^ex/$', people_views.export, name='down'),
     url(r'^id/$', people_views.export_list, name='show'),
     url(r'^export/$', people_views.xls_mould, name='xls_mould'),
-    #url(r'^index/$',people_views.index,name='home'),
-    #url(r'^add/$',people_views.add,name='add'),
+#form表彰
+    url(r'^$', people_views.indexform,name='home1')
 ]

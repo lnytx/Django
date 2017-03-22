@@ -19,6 +19,7 @@ from learn import views as learn_views
 import learn
 from learn.views import add2
 from people import views as people_views
+from django.conf.urls import url, include
 
 urlpatterns = [
 #     #url(r'^$',learn_views.index),
@@ -47,5 +48,11 @@ urlpatterns = [
     url(r'^id/$', people_views.export_list, name='show'),
     url(r'^export/$', people_views.xls_mould, name='xls_mould'),
 #form表彰
-    url(r'^$', people_views.indexform,name='home1')
+    url(r'^$', people_views.indexform,name='home1'),
+#发送邮件
+    url(r'^email_one/$', people_views.email_one, name='email_one'),
+    url(r'^email_attch/$', people_views.email_attch, name='email_attch'),
+    url(r'^email_html/$', people_views.email_html, name='email_html'),
+#用户注册系统
+    url(r'^accounts/', include('users.urls')),
 ]

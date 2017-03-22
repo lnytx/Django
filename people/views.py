@@ -111,3 +111,33 @@ def indexform(request):
     else:#如果不是post提交数据，就不传参数创建对象，并将对象返回给前台
         form=AddForm()
     return render(request, 'index2.html',{'form':form})
+
+#纯文本发邮件
+from django.core.mail import send_mail
+def email_one(request):
+    send_mail("主题是aaa", "正文是bbb", 'lnytx@163.com', ['lnytx@163.com'], fail_silently=False)
+    return HttpResponse('发送成功！')
+#有附件的邮件
+from django.core.mail import EmailMultiAlternatives
+def email_attch(request):
+    msg=EmailMultiAlternatives("主题是aaa", "正文是bbb", 'lnytx@163.com', ['lnytx@163.com'])
+    msg.attach_file('./aaa.txt','text/html')
+    msg.send(fail_silently=False)
+    return HttpResponse('发送附件成功！')
+#发送html邮件
+def email_html(request):
+    subject='这是一封信的主题'
+    message='这是正文的文本'
+    html_content='''
+    <p>请输入两个数字社里是get方法</p>
+    <form action="/add/" method="get">
+    a: <input type="text" name="a"> <br>
+    b: <input type="text" name="b"> <br>
+    <input type="submit" value="提交">
+    <a href="www.baidu.com" ><img src="http://www.divcss5.com/css-images/css-logo.gif" />网络图片</a>
+    '''
+    msg=EmailMultiAlternatives('subject','message','lnytx@163.com', ['lnytx@163.com'])
+    msg.attach_alternative(html_content,'text/html')
+    msg.send(fail_silently=True)
+    return HttpResponse('发送html附件成功！')
+    

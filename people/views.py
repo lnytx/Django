@@ -1,9 +1,12 @@
 from _decimal import Context
 from _io import StringIO
 from audioop import reverse
+import json
 from sys import modules
 import time
 
+from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template.context_processors import request
@@ -88,15 +91,22 @@ def export_list(request):
         #return HttpResponse(item_list)
         return render(request,'items.html',{'item_list':item_list})
     
-#页面间传值
+#页面间传值（以及ajax接收数据）
 def index(request):
-    return render(request,'index.html')
+    return render(request,'ajax.html')
 def add(request):
     a=request.GET.get('a',None)
     b=request.GET.get('b',None)
     a=int(a)
     b=int(b)
-    return HttpResponse(str(a+b))
+    #return HttpResponse(str(a+b))
+    #下面这个是测试ajax的
+    list=['django','渲染json到模板']
+    dict={'site':'王二小','author':'无名'}
+    #ajax可以传这些查询数据库数据到前台页面中
+#     people_list=User.objects.all()
+#     return HttpResponse(people_list)
+    return HttpResponse(str(int(a)+int(b)))
 
 #使用 Django 的 表单 (forms)传值
 def indexform(request):
@@ -110,15 +120,14 @@ def indexform(request):
             return HttpResponse(str(int(a)+int(b)))
     else:#如果不是post提交数据，就不传参数创建对象，并将对象返回给前台
         form=AddForm()
-    return render(request, 'index2.html',{'form':form})
+    #return render(request, 'index2.html',{'form':form})
+
 
 #纯文本发邮件
-from django.core.mail import send_mail
 def email_one(request):
     send_mail("主题是aaa", "正文是bbb", 'lnytx@163.com', ['lnytx@163.com'], fail_silently=False)
     return HttpResponse('发送成功！')
 #有附件的邮件
-from django.core.mail import EmailMultiAlternatives
 def email_attch(request):
     msg=EmailMultiAlternatives("主题是aaa", "正文是bbb", 'lnytx@163.com', ['lnytx@163.com'])
     msg.attach_file('./aaa.txt','text/html')
@@ -141,3 +150,12 @@ def email_html(request):
     msg.send(fail_silently=True)
     return HttpResponse('发送html附件成功！')
     
+    #Django传递数据给JS
+def tra_js(request):
+    list=['django','渲染json到模板']
+    dict={'site':'王二小','author':'无名'}
+    return render(request, 'js.html', {
+        'List': json.dumps(list),
+        'Dict': json.dumps(dict)
+    })
+    return render(request, 'js.html', {'List':json.dumps(list),'Dict':json.dumps(dict)})

@@ -41,9 +41,7 @@ INSTALLED_APPS = [
     'people',
     'blog',
 ]
-#create by myself
-#AUTH_USER_MODEL 是替换成自定义的用户认证。
-AUTH_USER_MODEL = 'users.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

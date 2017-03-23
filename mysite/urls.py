@@ -22,7 +22,7 @@ from people import views as people_views
 from django.conf.urls import url, include
 
 urlpatterns = [
-#     #url(r'^$',learn_views.index),
+    #url(r'^$',learn_views.index),
 #     #url(r'^add/$', learn_views.add),
 #     url(r'^add/(\d+)/(\d+)/$', learn_views.add2, name='add2'),
 #     #url(r'^new_add/(\d+)/(\d+)/$', learn_views.add2, name='add2'),
@@ -44,15 +44,20 @@ urlpatterns = [
     #url(r'^index/$',people_views.index,name='home'),
     #url(r'^add/$',people_views.add,name='add'),
 #按条件导出xls
-    url(r'^ex/$', people_views.export, name='down'),
-    url(r'^id/$', people_views.export_list, name='show'),
-    url(r'^export/$', people_views.xls_mould, name='xls_mould'),
+#     url(r'^ex/$', people_views.export, name='down'),
+#     url(r'^id/$', people_views.export_list, name='show'),
+#     url(r'^export/$', people_views.xls_mould, name='xls_mould'),
 #form表彰
-    url(r'^$', people_views.indexform,name='home1'),
+    #url(r'^$', people_views.indexform,name='home1'),
 #发送邮件
     url(r'^email_one/$', people_views.email_one, name='email_one'),
     url(r'^email_attch/$', people_views.email_attch, name='email_attch'),
     url(r'^email_html/$', people_views.email_html, name='email_html'),
 #用户注册系统
     url(r'^accounts/', include('users.urls')),
+#传数据到js上
+    url(r'^js/$', people_views.tra_js, name='tra_js'),
+#ajax接收数据
+    url(r'^$', people_views.index, name='home'),
+    url(r'^ajax/$', people_views.add, name='add'),    
 ]

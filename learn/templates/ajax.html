@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>请输入两个数字</p>
+<!--这里的action可以随便写，因为下面有这个按钮的点击事件-->
+<form action="/sss/" method="get">
+    a: <input type="text" id="a" name="a"> <br>
+    b: <input type="text" id="b" name="b"> <br>
+    <p>result: <span id='result'></span></p>
+    <button type="button" id='sum'>提交</button>
+</form>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(function(){
+      $("#sum").click(function(){
+        var a = $("#a").val();
+        var b = $("#b").val();
+	//从后台取得结果数据（通过这个ajax  GET /ajax/?a=1&b=4 HTTP/1.1" 这个request到url,然后url(r'^ajax/$', people_views.add, name='add'),
+	//在这里调用了views里面的add方法
+        $.get("/ajax/",{'a':a,'b':b}, function(ret){
+            $('#result').html(ret)
+        })
+      });
+    });
+</script>
+</body>
+</html>
+

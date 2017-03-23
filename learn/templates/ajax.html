@@ -18,7 +18,7 @@
 	//从后台取得结果数据（通过这个ajax  GET /ajax/?a=1&b=4 HTTP/1.1" 这个request到url,然后url(r'^ajax/$', people_views.add, name='add'),
 	//在这里调用了views里面的add方法
         $.get("/ajax/",{'a':a,'b':b}, function(ret){
-            $('#result').html(ret)
+            	$('#result').html(ret)
         })
       });
     });

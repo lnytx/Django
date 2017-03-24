@@ -1,5 +1,6 @@
 from _decimal import Context
 from _io import StringIO
+from _pickle import dumps
 from audioop import reverse
 import json
 from sys import modules
@@ -7,7 +8,8 @@ import time
 
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse, HttpResponseRedirect, \
+    JsonResponse
 from django.shortcuts import render
 from django.template.context_processors import request
 from django.views.decorators.csrf import csrf_exempt
@@ -104,9 +106,37 @@ def add(request):
     list=['django','渲染json到模板']
     dict={'site':'王二小','author':'无名'}
     #ajax可以传这些查询数据库数据到前台页面中
-#     people_list=User.objects.all()
-#     return HttpResponse(people_list)
+    #people_list=User.objects.all()
+    people_list=User.objects.filter(id=1)
+    #return HttpResponse(people_list.username)
     return HttpResponse(str(int(a)+int(b)))
+
+
+##页面间传值（向前台传输list与dict）
+#向前台传输list列表
+def ajax_list_dict(request):
+    return render(request,'ajax_list_dict.html')
+def ajax_list(request):
+    list=[x for x in range(100)]
+    #a=['a','b','c','d','e']
+    #return HttpResponse(json.dumps(a), content_type='application/json')
+#向前台传输dict
+def ajax_dict(request):
+    dict={'name':'人名','age':15,'班级':'高三(3)班','分数':99}
+    #return HttpResponse(json.dumps(dict),content_type=('application/json')
+    return JsonResponse(dict)
+#为user对象自定义一个方法来初现将user对象序列化，否则不能序列化
+# def user2dict(user):
+#     return {
+#         #'id': user.id,
+#         'name': user.username,
+#         'pass': user.password
+#     }
+# def queryset(request):
+#     people_list=User.objects.all()
+#     return  HttpResponse(json.dumps(people_list,default=user2dict),content_type=('application/json'))
+
+
 
 #使用 Django 的 表单 (forms)传值
 def indexform(request):

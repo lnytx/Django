@@ -59,5 +59,11 @@ urlpatterns = [
     url(r'^js/$', people_views.tra_js, name='tra_js'),
 #ajax接收数据
     url(r'^$', people_views.index, name='home'),
-    url(r'^ajax/$', people_views.add, name='add'),    
+    url(r'^ajax/$', people_views.add, name='add'),   
+    #ajax接收list与dict数据 
+    url(r'^ajax_list_dict/$', people_views.ajax_list_dict, name='home'),
+    url(r'^123/$', people_views.ajax_list, name='ajax_list'),
+    url(r'^4543/$', people_views.ajax_dict, name='ajax_dict'),
+    #url(r'^queryset/$', people_views.queryset, name='ajax_dict'),
+    
 ]

@@ -38,11 +38,12 @@ urlpatterns = [
 #     url(r'^for/$', learn_views.show_for),
 #     url(r'^if/$', learn_views.show_if),
 #     url(r'^listed/$', learn_views.show_listed),
-#     url(r'^people/$', people_views.show_people),
+#    url(r'^people/$', people_views.show_people),
 #     url(r'^insert/$',people_views.insert),
 #     url(r'^listuser/$',people_views.user_list),
     #url(r'^index/$',people_views.index,name='home'),
     #url(r'^add/$',people_views.add,name='add'),
+     url(r'^show/$',people_views.user_list,name='add'),
 #按条件导出xls
 #     url(r'^ex/$', people_views.export, name='down'),
 #     url(r'^id/$', people_views.export_list, name='show'),
@@ -68,5 +69,7 @@ urlpatterns = [
 #使用上下文渲染（使一个变量在多个模板中使用）
     url(r'^context1/$', people_views.context1),
     url(r'^context2/$', people_views.context2),
-    
+#分页的实现
+    url(r'^fenye/$', people_views.fenye),
+    url(r'^fenye2/$', people_views.fenye2),
 ]

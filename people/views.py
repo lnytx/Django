@@ -8,15 +8,13 @@ import time
 
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
-from django.http.response import HttpResponse, HttpResponseRedirect, \
-    JsonResponse
-from django.shortcuts import render
-from django.template.context_processors import request
-from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http.response import HttpResponse, JsonResponse
+import pagination
 from xlwt import *  
 import xlwt
 
-from people.models import User
+from people.connect_mysql import *
 
 from .tools import AddForm
 
@@ -39,17 +37,17 @@ def insert(request):
 
 #显示数据库数据
 def user_list(request):
-    #people_list=User.objects.all()
+    people_list=User.objects.all()
     
-    #切片操作，获取2个人，不支持负索引，切片可以节约内存
-    #people_list=User.objects.all()[:2]
-    
-    #如果需要获取满足条件的一些人，就要用到filter
-    people_list=User.objects.filter(id=3)
-    
-    #filter是找出满足条件的，当然也有排除符合某条件的
-    people_list=User.objects.exclude(id=3)
-    people_list=User.objects.filter(id=1).exclude(id=3)
+#     #切片操作，获取2个人，不支持负索引，切片可以节约内存
+#     #people_list=User.objects.all()[:2]
+#     
+#     #如果需要获取满足条件的一些人，就要用到filter
+#     people_list=User.objects.filter(id=3)
+#     
+#     #filter是找出满足条件的，当然也有排除符合某条件的
+#     people_list=User.objects.exclude(id=3)
+#     people_list=User.objects.filter(id=1).exclude(id=3)
     return render(request,'showuser.html',{'people_list':people_list})
 
 
@@ -197,3 +195,26 @@ def context1(request):
     return render(request,'context1.html')
 def context2(request):
     return render(request,'context2.html')
+
+
+######
+######分布功能实现
+def fenye(request):
+    user_list = select_table()
+    page = request.GET.get('page',1)
+
+    paginator = Paginator(user_list, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, './fenye/fenye.html', { 'users': users })
+######################################
+#coding:utf-8  
+# Create your views here.
+def fenye2(request):
+    user_list = select_table()
+    return render(request, './fenye2/fenye.html', { 'users': user_list })

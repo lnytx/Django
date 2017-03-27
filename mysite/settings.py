@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'learn',
     'people',
     'blog',
+    #分页
+    #'pagination', 
 ]
 
 MIDDLEWARE = [
@@ -51,7 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    #create as myself
+    #'pagination.middleware.PaginationMiddleware',
     #create my self,添加自己定义的一些中间件
     #'people.technical_500_response.UserBasedExceptionMiddleware',
 ]
@@ -152,3 +155,12 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'lnytx@163.com'
 EMAIL_HOST_PASSWORD = 'ln123456'
 DEFAULT_FROM_EMAIL = 'lnytx@163.com'
+
+##分页插件django-pagination添加的内容
+# TEMPLATE_CONTEXT_PROCESSORS = (  
+#         "django.core.context_processors.auth",  
+#         "django.core.context_processors.debug",  
+#         "django.core.context_processors.i18n",  
+#         "django.core.context_processors.media",  
+#         "django.core.context_processors.request"  
+#     )  

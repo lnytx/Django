@@ -1,0 +1,74 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+table{border:2px double #666;width:500px;height:200px;}
+th,td{border:1px double #666;}
+#w-normal{font-weight:normal;}
+#w-bold{font-weight:bold;}
+#w-bolder{font-weight:bolder;}
+#w-lighter{font-weight:lighter;}
+#w-1{font-weight:100;}
+#w-2{font-weight:200;}
+#w-3{font-weight:300;}
+#w-4{font-weight:400;}
+#w-5{font-weight:500;}
+#w-6{font-weight:600;}
+#w-7{font-weight:700;}
+#w-8{font-weight:800;}
+#w-9{font-weight:900;}
+-->
+  
+<style type="text/css">  
+    table{ width:60%; border:solid 1px #0066FF;}  
+    table td {border:solid 1px #0099ff;}  
+    a{ text-decoration: none;}  
+    .one{background-color: F0FFF0;}  
+    .two{background-color: ADFEDC;}  
+    .over{background-color: F9F900;}  
+</style>   
+</style>
+</head>
+<body>
+<script type="text/javascript">  
+ var name;  //存储tr对象的类名，当鼠标移开时进行恢复  
+ function trcolor(){  //表格行颜色间隔显示  
+     var tabNode = document.getElementsByTagName("table")[0];  
+     var trNodes = tabNode.rows;  
+     for(var x=1;x<trNodes.length;x++){  
+         if(x%2 == 1)  
+             trNodes[x].className = "one" ;   
+         else   
+             trNodes[x].className = "two" ;  
+         trNodes[x].onmouseover = function(){  //高亮显示  
+             name = this.className;  
+             this.className = "over";  
+         }  
+         trNodes[x].onmouseout = function(){  //tr对象添加onmouseout事件属性  
+             this.className = name ;  
+         }  
+     }  
+ }  
+    window.onload = trcolor ;  
+</script>  
+
+    <table>  
+        <tr>  
+            <td id="w-9">姓名</th><td id="w-9">年龄</th><td id="w-9">地址</th>
+        </tr>  
+        <tr>  
+            <td>张三</td><td>23</td><td>北京</td>  
+        </tr>  
+        <tr>  
+            <td>李四</td><td>25</td><td>上海</td>  
+        </tr>  
+        <tr>  
+            <td>王五</td><td>15</td><td>广州</td>  
+        </tr>  
+        <tr>  
+            <td>唐总</td><td>20</td><td>长沙</td>  
+        </tr>  
+    </table>  
+</body>  
+</html>

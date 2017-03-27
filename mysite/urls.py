@@ -54,7 +54,7 @@ urlpatterns = [
     url(r'^email_attch/$', people_views.email_attch, name='email_attch'),
     url(r'^email_html/$', people_views.email_html, name='email_html'),
 #用户注册系统
-    url(r'^accounts/', include('users.urls')),
+    #url(r'^accounts/', include('users.urls')),
 #传数据到js上
     url(r'^js/$', people_views.tra_js, name='tra_js'),
 #ajax接收数据
@@ -65,5 +65,8 @@ urlpatterns = [
     url(r'^123/$', people_views.ajax_list, name='ajax_list'),
     url(r'^4543/$', people_views.ajax_dict, name='ajax_dict'),
     #url(r'^queryset/$', people_views.queryset, name='ajax_dict'),
+#使用上下文渲染（使一个变量在多个模板中使用）
+    url(r'^context1/$', people_views.context1),
+    url(r'^context2/$', people_views.context2),
     
 ]

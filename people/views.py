@@ -189,3 +189,11 @@ def tra_js(request):
         'Dict': json.dumps(dict)
     })
     return render(request, 'js.html', {'List':json.dumps(list),'Dict':json.dumps(dict)})
+
+#动手写个上下文渲染器
+#把一个变量在多个模板之间共用，这时候就可以用 Django 上下文渲染器。
+#1、建渲染的模板，此例是context_processor.py模板，2、将新建的模板放入settings.py中3、修改views.py与urls.py
+def context1(request):
+    return render(request,'context1.html')
+def context2(request):
+    return render(request,'context2.html')

@@ -9,11 +9,14 @@ import time
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http.response import HttpResponse, JsonResponse
+from django.http.response import HttpResponse, JsonResponse, \
+    HttpResponseRedirect
+from django.shortcuts import render
 from xlwt import *  
 import xlwt
 
 from people.connect_mysql import *
+from people.models import User
 
 from .tools import AddForm
 
@@ -198,12 +201,43 @@ def context2(request):
 
 ######
 ######分页功能实现（根据订单号查找快递单号，并显示到finddelivery.html）
+def home(request):
+    return render(request, './worker/home.html')
 def rev(request):
     list_orders=[]
     list_orders=request.GET().get('a','None')
     request.GET.get("id",'None')
-def fenye(request):
-    user_list = select_table()
+def finddelivery(request):
+    return render(request,'./worker/finddelivery.html')
+def orderlog(request):
+    return render(request,'./worker/orderlog.html')
+
+##获取前台传入的值
+def get_request(request):
+    #list1=list(request.GET.get('textarea','None').strip())
+    list1=request.GET.get('textarea','None')
+    list1.strip()
+    print("list1",list1)
+    list2=list1.split(',')
+#     for item in list2:
+#         if item=='\r':
+#             list2.remove('\r')
+#         elif item=='\n':
+#             list2.remove('\n')
+#         elif item=='\t':
+#             list2.remove('\t')
+    print("list2",list2)
+#     list2 = []
+#     [list2.append(i) for i in list1 if not i in list2]
+#     list2.remove(',')
+#     list2.remove('\r')
+#     list2.remove('\t')
+#     list2.remove('\n')
+    print("list2",list2)
+    print("format_args(list2)",format_args(list2))
+    sql='select * from test where id in'+format_args(list2) % tuple(list2)
+    print("sql",sql)
+    user_list = select_table(sql)
     page = request.GET.get('page',1)
 
     paginator = Paginator(user_list, 10)
@@ -214,4 +248,20 @@ def fenye(request):
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
 
-    return render(request, './worker/fenye.html', { 'users': users })
+    return render(request, './worker/finddelivery.html', { 'users': users })
+
+
+def fenye(request):
+    sql='select * from test where id in (1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23)'
+    user_list = select_table(sql)
+    page = request.GET.get('page',1)
+
+    paginator = Paginator(user_list, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, './fenye/fenye.html', { 'users': users })

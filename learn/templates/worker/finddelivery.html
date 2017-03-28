@@ -1,17 +1,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--根据订单号查看或导出快递单号-->
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<p>请输入两个数字</p>
-<!--这里的action可以随便写，因为下面有这个按钮的点击事件-->
-<form action="//" method="get">
-   	<textarea rows="3" cols="20">
-	输入订单号（多个订单号之间使用,隔开）
-	</textarea>
-    <button type="button" id='sum'>提交</button>
-</form>
-
 </head>
+<p>快递单导出</p>
+<!--这里的action可以随便写，因为下面有这个按钮的点击事件-->
+<form action="/getresults/" method="get">
+<div>
+   	<textarea id='textarea' rows="10" cols="20" name='textarea'>
+输入订单号（多个订单号之间使用,隔开）
+	</textarea>
+</div>
+    <button type="submit" id='sum' >提交</button>
+</form>
 <style type="text/css">
 <!--
 table{border:2px double #666;width:500px;height:200px;}
@@ -60,7 +60,18 @@ th,td{border:1px double #666;}
      }  
  }  
     window.onload = trcolor ;  
-  
+    
+ 
+   function clicke(){
+         
+         var text = document.getElementById("textarea").value; 
+         
+         }
+      
+</script>  
+
+
+
 <table class="table table-bordered">
     <tr>
       <th>id</th>

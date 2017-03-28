@@ -71,5 +71,8 @@ urlpatterns = [
     url(r'^context2/$', people_views.context2),
 #分页的实现
     url(r'^fenye/$', people_views.fenye),
-    url(r'^fenye2/$', people_views.fenye2),
+#快递单导出等功能
+    url(r'^home/$', people_views.home),
+    url(r'^finddelivery/$', people_views.finddelivery,name='finddelivery'),
+    url(r'^getresults/', people_views.get_request),
 ]

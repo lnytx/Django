@@ -10,7 +10,6 @@ from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http.response import HttpResponse, JsonResponse
-import pagination
 from xlwt import *  
 import xlwt
 
@@ -198,7 +197,11 @@ def context2(request):
 
 
 ######
-######分布功能实现
+######分页功能实现（根据订单号查找快递单号，并显示到finddelivery.html）
+def rev(request):
+    list_orders=[]
+    list_orders=request.GET().get('a','None')
+    request.GET.get("id",'None')
 def fenye(request):
     user_list = select_table()
     page = request.GET.get('page',1)
@@ -211,10 +214,4 @@ def fenye(request):
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
 
-    return render(request, './fenye/fenye.html', { 'users': users })
-######################################
-#coding:utf-8  
-# Create your views here.
-def fenye2(request):
-    user_list = select_table()
-    return render(request, './fenye2/fenye.html', { 'users': user_list })
+    return render(request, './worker/fenye.html', { 'users': users })

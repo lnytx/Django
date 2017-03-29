@@ -213,42 +213,44 @@ def orderlog(request):
     return render(request,'./worker/orderlog.html')
 
 ##获取前台传入的值
+
+
 def get_request(request):
     #list1=list(request.GET.get('textarea','None').strip())
-    list1=request.GET.get('textarea','None')
-    list1.strip()
-    print("list1",list1)
-    list2=list1.split(',')
-#     for item in list2:
-#         if item=='\r':
+    users=[]
+    if request.method=="POST":
+        list1=request.POST.get('textarea','None').strip()
+        list1.strip()
+        print("list1",list(list1.split('\r\n')))
+        #
+        #逗号形式
+        list2=list1.split('\r\n')
+        print("list1",list1)
+#         #list2=[]
+#         #[list2.append(i) for i in list1 if not i in list2]
+#         if '\r' in list2:
+# #             for item in list2:
+# #             if item=='\r':
 #             list2.remove('\r')
-#         elif item=='\n':
-#             list2.remove('\n')
-#         elif item=='\t':
-#             list2.remove('\t')
-    print("list2",list2)
-#     list2 = []
-#     [list2.append(i) for i in list1 if not i in list2]
-#     list2.remove(',')
-#     list2.remove('\r')
-#     list2.remove('\t')
-#     list2.remove('\n')
-    print("list2",list2)
-    print("format_args(list2)",format_args(list2))
-    sql='select * from test where id in'+format_args(list2) % tuple(list2)
-    print("sql",sql)
-    user_list = select_table(sql)
-    page = request.GET.get('page',1)
-
-    paginator = Paginator(user_list, 10)
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
-
-    return render(request, './worker/finddelivery.html', { 'users': users })
+#         elif '\n' in list2:
+#                 list2.remove('\n')
+#         elif '\t' in list2:
+#                 list2.remove('\t')
+        #list2.remove('\n')
+        #list2.remove(',')
+        print("list2",list2)
+    #     list2 = []
+    #     [list2.append(i) for i in list1 if not i in list2]
+    #     list2.remove(',')
+    #     list2.remove('\r')
+    #     list2.remove('\t')
+    #     list2.remove('\n')
+        print("list2",list2)
+        print("format_args(list2)",format_args(list2))
+        sql='select * from test where id in'+format_args(list2) % tuple(list2)
+        print("sql",sql)
+        user_list = select_table(sql)
+    return render(request, './worker/finddelivery.html', { 'users': user_list })
 
 
 def fenye(request):

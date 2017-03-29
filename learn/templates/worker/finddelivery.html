@@ -4,11 +4,9 @@
 </head>
 <p>快递单导出</p>
 <!--这里的action可以随便写，因为下面有这个按钮的点击事件-->
-<form action="/getresults/" method="get">
+<form action="/getresults/" method="post">
 <div>
-   	<textarea id='textarea' rows="10" cols="20" name='textarea'>
-输入订单号（多个订单号之间使用,隔开）
-	</textarea>
+   	<textarea id='textarea' rows="10" cols="20" name='textarea'>输入订单号（多个订单号之间使用,隔开）</textarea>
 </div>
     <button type="submit" id='sum' >提交</button>
 </form>
@@ -89,31 +87,8 @@ th,td{border:1px double #666;}
     {% endfor %}
 </table>
  
-<ul class="pagination">
-{% if users.has_previous %}
-    <li><a href="?table=1&&page={{ users.previous_page_number }}" class="prev">{{ previous_link_decorator|safe }}上一页</a></li>
-{% else %}
-    <li class="paginate_button previous disabled"><span class="disabled prev">{{ previous_link_decorator|safe }}上一页</span></li>
-{% endif %}
- 
- 
-{% for page in users.paginator.page_range %}
-{% if page %}
-{% ifequal page users.number %}
-<li class="active"><span class="current page">{{ page }}</span></li>
-{% else %}
-<li><a href="?table=1&&page{{ page_suffix }}={{ page }}{{ getvars }}" class="page">{{ page }}</a></li>
-{% endifequal %}
-{% else %}
-      <li>...</li>
-{% endif %}
-{% endfor %}
-   
-{% if users.has_next %}
-        <li><a href="?table=1&&page={{ users.next_page_number }}" class="next">下一页{{ next_link_decorator|safe }}</a></li>
-{% else %}
-        <li class="paginate_button next disabled"><span class="disabled next">下一页{{ next_link_decorator|safe }}</span></li>
-{% endif %}
+
+
 </ul>
 </div>
 </body>  

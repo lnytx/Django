@@ -75,4 +75,5 @@ urlpatterns = [
     url(r'^home/$', people_views.home),
     url(r'^finddelivery/$', people_views.finddelivery,name='finddelivery'),
     url(r'^getresults/', people_views.get_request),
+    
 ]
